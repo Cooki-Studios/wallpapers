@@ -7,9 +7,6 @@ function getParameterByName(name, url = window.location.href) {
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
-function changeColor() {
-    window.location.replace("http://cooki-studios.github.io/wallpapers?bg-color="+document.getElementById("color").value);
-}
-
 window.addEventListener("load",function() { document.body.style.background = "#"+getParameterByName('bg-color') });
 window.addEventListener("load",function() { document.getElementById("color").value = "#"+getParameterByName('bg-color') });
+document.getElementById("color").addEventListener("input",function() { window.location.replace("http://cooki-studios.github.io/wallpapers?bg-color="+document.getElementById("color").value) });
