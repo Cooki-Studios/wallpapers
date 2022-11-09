@@ -3,6 +3,9 @@ const color = document.getElementById("color");
 const canvas = document.getElementById("canvas");
 c = canvas.getContext("2d");
 
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
 if (getParameterByName('fill-style') != null) {
     if ((String(getParameterByName('fill-style')).charAt(0) == "r")) {
         c.fillStyle = getParameterByName('fill-style');
@@ -38,5 +41,3 @@ if (getParameterByName('bg-color') != null) {
         window.addEventListener("load",function() { color.value = "#"+getParameterByName('bg-color') });
     }
 }
-
-settings.style.paddingTop = window.innerHeight+"px";
