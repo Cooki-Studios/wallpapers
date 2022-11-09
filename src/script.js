@@ -8,7 +8,7 @@ function getParameterByName(name, url = window.location.href) {
 }
 
 function redirect() {
-    window.location.replace("http://cooki-studios.github.io/wallpapers?bg-color="+document.getElementById("color").value.slice(1));
+    window.location.replace("?bg-color="+document.getElementById("color").value.slice(1));
 }
 
 if (getParameterByName('bg-color').charAt(0) == r) {
