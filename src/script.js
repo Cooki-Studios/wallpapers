@@ -11,6 +11,11 @@ function redirect() {
     window.location.replace("http://cooki-studios.github.io/wallpapers?bg-color="+document.getElementById("color").value.slice(1));
 }
 
-window.addEventListener("load",function() { document.body.style.background = "#"+getParameterByName('bg-color') });
-window.addEventListener("load",function() { document.getElementById("color").value = "#"+getParameterByName('bg-color') });
+if (getParameterByName('bg-color').charAt(0) == r) {
+    window.addEventListener("load",function() { document.body.style.background = getParameterByName('bg-color') });
+    window.addEventListener("load",function() { document.getElementById("color").value = getParameterByName('bg-color') });
+} else {
+    window.addEventListener("load",function() { document.body.style.background = "#"+getParameterByName('bg-color') });
+    window.addEventListener("load",function() { document.getElementById("color").value = "#"+getParameterByName('bg-color') });
+}
 document.getElementById("settings").style.paddingTop = window.innerHeight+"px";
