@@ -3,14 +3,11 @@ const color = document.getElementById("color");
 const canvas = document.getElementById("canvas");
 c = canvas.getContext("2d");
 
-c.fillStyle = "#fff"
-c.fillRect(0, 0, canvas.width, canvas.height);
-
-if (getParameterByName('bg-color') != null) {
-    if ((String(getParameterByName('bg-color')).charAt(0) == "r")) {
-        c.fillStyle = getParameterByName('bg-color');
+if (getParameterByName('fill-style') != null) {
+    if ((String(getParameterByName('fill-style')).charAt(0) == "r")) {
+        c.fillStyle = getParameterByName('fill-style');
     } else {
-        c.fillStyle = "#"+getParameterByName('bg-color');
+        c.fillStyle = "#"+getParameterByName('fill-style');
     }
 }
 
