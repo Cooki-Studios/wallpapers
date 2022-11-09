@@ -1,6 +1,8 @@
 const settings = document.getElementById("settings");
 const color = document.getElementById("fill-color");
 const color2 = document.getElementById("fill-style");
+const amount = document.getElementById("amount");
+
 const canvas = document.getElementById("canvas");
 c = canvas.getContext("2d");
 
@@ -17,7 +19,7 @@ if (getParameterByName('fill-style') != null) {
 
 c.beginPath();
 c.moveTo(0, canvas.height);
-c.quadraticCurveTo(canvas.width/2, Math.random()*canvas.height/2, canvas.width, canvas.height);
+c.quadraticCurveTo(canvas.width/amount.value/2, Math.random()*canvas.height/2, canvas.width, canvas.height);
 c.fill();
 
 function getParameterByName(name, url = window.location.href) {
@@ -30,7 +32,7 @@ function getParameterByName(name, url = window.location.href) {
 }
 
 function redirect() {
-    window.location.replace("?bg-color="+color.value.slice(1)+"&fill-style="+color2.value.slice(1));
+    window.location.replace("?bg-color="+color.value.slice(1)+"&fill-style="+color2.value.slice(1)+"&amount="+amount.value);
 }
 
 if (getParameterByName('bg-color') != null) {
