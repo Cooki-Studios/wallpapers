@@ -16,7 +16,7 @@ if (getParameterByName('bg-color') != null) {
 
 c.beginPath();
 c.moveTo(0, canvas.height);
-c.quadraticCurveTo(canvas.width/2, canvas.height/2, canvas.width, canvas.height);
+c.quadraticCurveTo(canvas.width/2, Math.random()*canvas.height/2, canvas.width, canvas.height);
 c.fill();
 
 function getParameterByName(name, url = window.location.href) {
