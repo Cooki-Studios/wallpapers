@@ -1,5 +1,6 @@
 const settings = document.getElementById("settings");
-const color = document.getElementById("color");
+const color = document.getElementById("fill-color");
+const color2 = document.getElementById("fill-style");
 const canvas = document.getElementById("canvas");
 c = canvas.getContext("2d");
 
@@ -29,7 +30,7 @@ function getParameterByName(name, url = window.location.href) {
 }
 
 function redirect() {
-    window.location.replace("?bg-color="+color.value.slice(1));
+    window.location.replace("?bg-color="+color.value.slice(1)+"&fill-style="+color2.value.slice(1));
 }
 
 if (getParameterByName('bg-color') != null) {
