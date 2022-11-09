@@ -13,3 +13,4 @@ function redirect() {
 
 window.addEventListener("load",function() { document.body.style.background = "#"+getParameterByName('bg-color') });
 window.addEventListener("load",function() { document.getElementById("color").value = "#"+getParameterByName('bg-color') });
+document.getElementById("settings").style.paddingTop = window.innerHeight+"px";
