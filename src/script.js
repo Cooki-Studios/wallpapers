@@ -54,3 +54,12 @@ if (getParameterByName('bg-color') != null) {
         color.value = getParameterByName('bg-color');
     }
 }
+
+function exportImg(type) {
+    if (type == 'png') {
+        const link = document.createElement("a");
+        link.href = canvas.toDataURL('image/png');
+        link.download = "CSbackground.png";
+        link.click();
+    }
+}
