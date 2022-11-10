@@ -3,15 +3,15 @@ const color = document.getElementById("bg-color");
 const color2 = document.getElementById("fill-style");
 const amount = document.getElementById("amount");
 
-if (getParameterByName('amount') != null) {
-    amount.value = getParameterByName('amount');
-}
-
 const canvas = document.getElementById("canvas");
 c = canvas.getContext("2d");
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+
+if (getParameterByName('amount') != null) {
+    amount.value = getParameterByName('amount');
+}
 
 if (getParameterByName('fill-style') != null) {
     if ((String(getParameterByName('fill-style')).charAt(0) == "r")) {
@@ -48,10 +48,14 @@ if (getParameterByName('bg-color') != null) {
         window.addEventListener("load",function() { document.body.style.background = getParameterByName('bg-color') });
         window.addEventListener("load",function() { color.value = getParameterByName('bg-color') });
         color.value = "#"+getParameterByName('bg-color');
+        c.fillStyle = color.value;
+        c.fillRect(0,0,canvas.windth,canvas.height);
     } else {
         window.addEventListener("load",function() { document.body.style.background = "#"+getParameterByName('bg-color') });
         window.addEventListener("load",function() { color.value = "#"+getParameterByName('bg-color') });
         color.value = getParameterByName('bg-color');
+        c.fillStyle = color.value;
+        c.fillRect(0,0,canvas.windth,canvas.height);
     }
 }
 
