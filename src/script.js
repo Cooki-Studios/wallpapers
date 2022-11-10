@@ -49,13 +49,13 @@ if (getParameterByName('bg-color') != null) {
         window.addEventListener("load",function() { color.value = getParameterByName('bg-color') });
         color.value = "#"+getParameterByName('bg-color');
         c.fillStyle = color.value;
-        c.fillRect(0,0,canvas.windth,canvas.height);
+        c.fillRect(0,0,canvas.width,canvas.height);
     } else {
         window.addEventListener("load",function() { document.body.style.background = "#"+getParameterByName('bg-color') });
         window.addEventListener("load",function() { color.value = "#"+getParameterByName('bg-color') });
         color.value = getParameterByName('bg-color');
         c.fillStyle = color.value;
-        c.fillRect(0,0,canvas.windth,canvas.height);
+        c.fillRect(0,0,canvas.width,canvas.height);
     }
 }
 
