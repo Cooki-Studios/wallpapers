@@ -26,7 +26,7 @@ if (getParameterByName('fill-style') != null) {
 for (let i = 0; i < amount.value; i++) {
     c.beginPath();
     c.moveTo(canvas.width/amount.value*i, canvas.height);
-    c.quadraticCurveTo(canvas.width/amount.value*i+(canvas.width/amount.value/3), Math.random()*canvas.height/2, canvas.width/amount.value*(i+1), canvas.height);
+    c.quadraticCurveTo((canvas.width/amount.value*i)+(canvas.width/amount.value/3), Math.random()*canvas.height/2, canvas.width/amount.value*(i+1), canvas.height);
     c.fill();
 }
 
