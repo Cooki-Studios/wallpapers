@@ -13,6 +13,22 @@ if (getParameterByName('amount') != null) {
     amount.value = getParameterByName('amount');
 }
 
+if (getParameterByName('bg-color') != null) {
+    if ((String(getParameterByName('bg-color')).charAt(0) == "r")) {
+        window.addEventListener("load",function() { document.body.style.background = getParameterByName('bg-color') });
+        window.addEventListener("load",function() { color.value = getParameterByName('bg-color') });
+        color.value = "#"+getParameterByName('bg-color');
+        c.fillStyle = color.value;
+        c.fillRect(0,0,canvas.width,canvas.height);
+    } else {
+        window.addEventListener("load",function() { document.body.style.background = "#"+getParameterByName('bg-color') });
+        window.addEventListener("load",function() { color.value = "#"+getParameterByName('bg-color') });
+        color.value = getParameterByName('bg-color');
+        c.fillStyle = color.value;
+        c.fillRect(0,0,canvas.width,canvas.height);
+    }
+}
+
 if (getParameterByName('fill-style') != null) {
     if ((String(getParameterByName('fill-style')).charAt(0) == "r")) {
         c.fillStyle = getParameterByName('fill-style');
@@ -41,22 +57,6 @@ function getParameterByName(name, url = window.location.href) {
 
 function redirect() {
     window.location.replace("?bg-color="+color.value.slice(1)+"&fill-style="+color2.value.slice(1)+"&amount="+amount.value);
-}
-
-if (getParameterByName('bg-color') != null) {
-    if ((String(getParameterByName('bg-color')).charAt(0) == "r")) {
-        window.addEventListener("load",function() { document.body.style.background = getParameterByName('bg-color') });
-        window.addEventListener("load",function() { color.value = getParameterByName('bg-color') });
-        color.value = "#"+getParameterByName('bg-color');
-        c.fillStyle = color.value;
-        c.fillRect(0,0,canvas.width,canvas.height);
-    } else {
-        window.addEventListener("load",function() { document.body.style.background = "#"+getParameterByName('bg-color') });
-        window.addEventListener("load",function() { color.value = "#"+getParameterByName('bg-color') });
-        color.value = getParameterByName('bg-color');
-        c.fillStyle = color.value;
-        c.fillRect(0,0,canvas.width,canvas.height);
-    }
 }
 
 function exportImg(type) {
