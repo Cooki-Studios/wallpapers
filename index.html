@@ -10,9 +10,18 @@
 <body id="main" onresize="redirect()">
     <canvas id="canvas"></canvas>
     <div id="settings">
+        <h2 class="section-title">Background:</h2>
+        <select name="backgroundType" id="bgType">
+            <option value="Flat">Plain Colour</option>
+            <option value="Linear">Linear Gradient</option>
+            <option value="Radial">Radial Gradient</option>
+        </select><br>
+        <input type="color" id="bg-color" onblur="redirect()"><br>
+        <h2 class="section-title">Fill Colour:</h2>
+        <input type="color" id="fill-style" onblur="redirect()"><br>
+        <h2 class="section-title">Amount:</h2>
         <input type="number" value="8" id="amount" name="amount" min="0" max="8" step="1" onblur="redirect()">
-        <input type="color" id="bg-color" onblur="redirect()">
-        <input type="color" id="fill-style" onblur="redirect()">
+        <h2 class="section-title">Export:</h2>
         <button onclick="exportImg('png')">EXPORT (PNG)</button>
     </div>
 </body>
