@@ -73,12 +73,12 @@ function exportImg(type) {
     }
 }
 
-var grd = c.createLinearGradient(0,0,canvas.width,canvas.height);
-grd.addColorStop(0,"red");
-grd.addColorStop(1,"white");
+//var grd = c.createLinearGradient(0,0,canvas.width,canvas.height);
+//grd.addColorStop(0,"red");
+//grd.addColorStop(1,"white");
 
-console.log(grd)
+//console.log(grd)
 
 // Fill with gradient
-c.fillStyle = grd;
-c.fillRect(0,0,canvas.width,canvas.height);
+//c.fillStyle = grd;
+//c.fillRect(0,0,canvas.width,canvas.height);
