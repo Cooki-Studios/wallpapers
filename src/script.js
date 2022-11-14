@@ -6,50 +6,54 @@ const amount = document.getElementById("amount");
 const canvas = document.getElementById("canvas");
 c = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+function draw(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-if (getParameterByName('amount') != null) {
-    amount.value = getParameterByName('amount');
-}
+    if (getParameterByName('amount') != null) {
+        amount.value = getParameterByName('amount');
+    }
 
-if (getParameterByName('bg-color') != null) {
-    if ((String(getParameterByName('bg-color')).charAt(0) == "r")) {
-        window.addEventListener("load",function() { document.body.style.background = getParameterByName('bg-color') });
-        window.addEventListener("load",function() { color.value = getParameterByName('bg-color') });
-        color.value = getParameterByName('bg-color');
-        c.fillStyle = color.value;
-        c.fillRect(0,0,canvas.width,canvas.height);
-    } else {
-        window.addEventListener("load",function() { document.body.style.background = "#"+getParameterByName('bg-color') });
-        window.addEventListener("load",function() { color.value = "#"+getParameterByName('bg-color') });
-        color.value = "#"+getParameterByName('bg-color');
-        c.fillStyle = color.value;
-        c.fillRect(0,0,canvas.width,canvas.height);
+    if (getParameterByName('bg-color') != null) {
+        if ((String(getParameterByName('bg-color')).charAt(0) == "r")) {
+            window.addEventListener("load",function() { document.body.style.background = getParameterByName('bg-color') });
+            window.addEventListener("load",function() { color.value = getParameterByName('bg-color') });
+            color.value = getParameterByName('bg-color');
+            c.fillStyle = color.value;
+            c.fillRect(0,0,canvas.width,canvas.height);
+        } else {
+            window.addEventListener("load",function() { document.body.style.background = "#"+getParameterByName('bg-color') });
+            window.addEventListener("load",function() { color.value = "#"+getParameterByName('bg-color') });
+            color.value = "#"+getParameterByName('bg-color');
+            c.fillStyle = color.value;
+            c.fillRect(0,0,canvas.width,canvas.height);
+        }
+    }
+
+    if (getParameterByName('fill-style') != null) {
+        if ((String(getParameterByName('fill-style')).charAt(0) == "r")) {
+            c.fillStyle = getParameterByName('fill-style');
+            color2.value = getParameterByName('fill-style');
+            for (let i = 0; i < amount.value; i++) {
+                c.beginPath();
+                c.moveTo(canvas.width/amount.value*i, canvas.height);
+                c.quadraticCurveTo((canvas.width/amount.value*i)+(canvas.width/amount.value/3), Math.random()*canvas.height/2, canvas.width/amount.value*(i+1), canvas.height);
+                c.fill();
+            }
+        } else {
+            c.fillStyle = "#"+getParameterByName('fill-style');
+            color2.value = "#"+getParameterByName('fill-style');
+            for (let i = 0; i < amount.value; i++) {
+                c.beginPath();
+                c.moveTo(canvas.width/amount.value*i, canvas.height);
+                c.quadraticCurveTo((canvas.width/amount.value*i)+(canvas.width/amount.value/3), Math.random()*canvas.height/2, canvas.width/amount.value*(i+1), canvas.height);
+                c.fill();
+            }
+        }
     }
 }
 
-if (getParameterByName('fill-style') != null) {
-    if ((String(getParameterByName('fill-style')).charAt(0) == "r")) {
-        c.fillStyle = getParameterByName('fill-style');
-        color2.value = getParameterByName('fill-style');
-        for (let i = 0; i < amount.value; i++) {
-            c.beginPath();
-            c.moveTo(canvas.width/amount.value*i, canvas.height);
-            c.quadraticCurveTo((canvas.width/amount.value*i)+(canvas.width/amount.value/3), Math.random()*canvas.height/2, canvas.width/amount.value*(i+1), canvas.height);
-            c.fill();
-        }
-    } else {
-        c.fillStyle = "#"+getParameterByName('fill-style');
-        color2.value = "#"+getParameterByName('fill-style');
-        for (let i = 0; i < amount.value; i++) {
-            c.beginPath();
-            c.moveTo(canvas.width/amount.value*i, canvas.height);
-            c.quadraticCurveTo((canvas.width/amount.value*i)+(canvas.width/amount.value/3), Math.random()*canvas.height/2, canvas.width/amount.value*(i+1), canvas.height);
-            c.fill();
-        }
-    }
-}
+draw();
 
 function getParameterByName(name, url = window.location.href) {
     name = name.replace(/[\[\]]/g, '\\$&');
@@ -89,6 +93,7 @@ var time = 0;
 var t = setInterval(function() {
     if (time == 100) {
       reload();
+      draw();
     }
 
     if(!isPaused) {
@@ -110,6 +115,7 @@ function reload(){
   t = setInterval(function() {
     if (time == 100) {
       reload();
+      draw();
     }
 
     if(!isPaused) {
