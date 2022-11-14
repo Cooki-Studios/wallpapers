@@ -82,3 +82,39 @@ function exportImg(type) {
 // Fill with gradient
 //c.fillStyle = grd;
 //c.fillRect(0,0,canvas.width,canvas.height);
+
+var isPaused = true;
+var time = 0;
+
+var t = setInterval(function() {
+    if (time == 100) {
+      reload();
+    }
+
+    if(!isPaused) {
+        time++;
+        console.log("Seconds: " + time);
+    }
+}, 1);
+
+function play(){
+    isPaused = false;
+}
+
+function pause(){
+    isPaused = true;
+}
+
+function reload(){
+  time = 0;
+  t = setInterval(function() {
+    if (time == 100) {
+      reload();
+    }
+
+    if(!isPaused) {
+        time++;
+        console.log("Seconds: " + time);
+    }
+}, 1);
+}
