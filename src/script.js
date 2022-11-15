@@ -53,7 +53,7 @@ function draw(y){
     }
 }
 
-draw();
+draw(Math.random()*canvas.height/2);
 
 function getParameterByName(name, url = window.location.href) {
     name = name.replace(/[\[\]]/g, '\\$&');
@@ -113,8 +113,8 @@ function reload(){
   time = 0;
   t = setInterval(function() {
     if (time == 100) {
-      reload();
-      draw(Math.random()*canvas.height/2);
+        draw(Math.random()*canvas.height/2);
+        reload();
     }
 
     if(!isPaused) {
