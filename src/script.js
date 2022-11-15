@@ -6,7 +6,7 @@ const amount = document.getElementById("amount");
 const canvas = document.getElementById("canvas");
 c = canvas.getContext("2d");
 
-function draw(x,y){
+function draw(y){
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
@@ -37,7 +37,7 @@ function draw(x,y){
             for (let i = 0; i < amount.value; i++) {
                 c.beginPath();
                 c.moveTo(canvas.width/amount.value*i, canvas.height);
-                c.quadraticCurveTo(x, y, canvas.width/amount.value*(i+1), canvas.height);
+                c.quadraticCurveTo((canvas.width/amount.value*i)+(canvas.width/amount.value/3), y, canvas.width/amount.value*(i+1), canvas.height);
                 c.fill();
             }
         } else {
@@ -46,7 +46,7 @@ function draw(x,y){
             for (let i = 0; i < amount.value; i++) {
                 c.beginPath();
                 c.moveTo(canvas.width/amount.value*i, canvas.height);
-                c.quadraticCurveTo(x, y, canvas.width/amount.value*(i+1), canvas.height);
+                c.quadraticCurveTo((canvas.width/amount.value*i)+(canvas.width/amount.value/3), y, canvas.width/amount.value*(i+1), canvas.height);
                 c.fill();
             }
         }
@@ -93,7 +93,7 @@ var time = 0;
 var t = setInterval(function() {
     if (time == 100) {
       reload();
-      draw((canvas.width/amount.value*i)+(canvas.width/amount.value/3),Math.random()*canvas.height/2);
+      draw(Math.random()*canvas.height/2);
     }
 
     if(!isPaused) {
@@ -114,7 +114,7 @@ function reload(){
   t = setInterval(function() {
     if (time == 100) {
       reload();
-      draw((canvas.width/amount.value*i)+(canvas.width/amount.value/3),Math.random()*canvas.height/2);
+      draw(Math.random()*canvas.height/2);
     }
 
     if(!isPaused) {
