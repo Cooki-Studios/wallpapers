@@ -2,6 +2,7 @@ const settings = document.getElementById("settings");
 const color = document.getElementById("bg-color");
 const color2 = document.getElementById("fill-style");
 const amount = document.getElementById("amount");
+const bgType = document.getElementById("bg-type");
 
 const canvas = document.getElementById("canvas");
 c = canvas.getContext("2d");
@@ -10,46 +11,74 @@ function draw(y){
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
+    if (getParameterByName('bg-type') != null) {
+        bgType.value = getParameterByName('bg-type');
+    } else {
+        bgType.value = "flat";
+    }
+
     if (getParameterByName('amount') != null) {
         amount.value = getParameterByName('amount');
     }
 
-    if (getParameterByName('bg-color') != null) {
-        if ((String(getParameterByName('bg-color')).charAt(0) == "r")) {
-            window.addEventListener("load",function() { document.body.style.background = getParameterByName('bg-color') });
-            window.addEventListener("load",function() { color.value = getParameterByName('bg-color') });
-            color.value = getParameterByName('bg-color');
-            c.fillStyle = color.value;
-            c.fillRect(0,0,canvas.width,canvas.height);
-        } else {
-            window.addEventListener("load",function() { document.body.style.background = "#"+getParameterByName('bg-color') });
-            window.addEventListener("load",function() { color.value = "#"+getParameterByName('bg-color') });
-            color.value = "#"+getParameterByName('bg-color');
-            c.fillStyle = color.value;
-            c.fillRect(0,0,canvas.width,canvas.height);
+    if (bgType.value == "flat") {
+        if (bgType.value != null) {
+            if ((String(getParameterByName('bg-color')).charAt(0) == "r")) {
+                window.addEventListener("load",function() { document.body.style.background = getParameterByName('bg-color') });
+                window.addEventListener("load",function() { color.value = getParameterByName('bg-color') });
+                color.value = getParameterByName('bg-color');
+                c.fillStyle = color.value;
+                c.fillRect(0,0,canvas.width,canvas.height);
+            } else {
+                window.addEventListener("load",function() { document.body.style.background = "#"+getParameterByName('bg-color') });
+                window.addEventListener("load",function() { color.value = "#"+getParameterByName('bg-color') });
+                color.value = "#"+getParameterByName('bg-color');
+                c.fillStyle = color.value;
+                c.fillRect(0,0,canvas.width,canvas.height);
+            }
         }
+    } else if (bgType.value == "linear") {
+        var grd = c.createLinearGradient(0,0,canvas.width,0);
+        grd.addColorStop(0,color.value);
+        grd.addColorStop(1,"white");
+
+        // Fill with gradient
+        c.fillStyle = grd;
+        c.fillRect(0,0,canvas.width,canvas.height);
+    } else if (bgType.value == "radial") {
+        var grd = c.createRadialGradient(canvas.width/2, canvas.height/2, 0, canvas.width/2, canvas.height/2, canvas.height);
+        grd.addColorStop(0,color.valuez);
+        grd.addColorStop(1,"white");
+
+        // Fill with gradient
+        c.fillStyle = grd;
+        c.fillRect(0,0,canvas.width,canvas.height);
     }
 
     if (getParameterByName('fill-style') != null) {
         if ((String(getParameterByName('fill-style')).charAt(0) == "r")) {
             c.fillStyle = getParameterByName('fill-style');
             color2.value = getParameterByName('fill-style');
-            for (let i = 0; i < amount.value; i++) {
-                c.beginPath();
-                c.moveTo(canvas.width/amount.value*i, canvas.height);
-                c.quadraticCurveTo((canvas.width/amount.value*i)+(canvas.width/amount.value/3), y, canvas.width/amount.value*(i+1), canvas.height);
-                c.fill();
-            }
         } else {
             c.fillStyle = "#"+getParameterByName('fill-style');
             color2.value = "#"+getParameterByName('fill-style');
-            for (let i = 0; i < amount.value; i++) {
-                c.beginPath();
-                c.moveTo(canvas.width/amount.value*i, canvas.height);
-                c.quadraticCurveTo((canvas.width/amount.value*i)+(canvas.width/amount.value/3), y, canvas.width/amount.value*(i+1), canvas.height);
-                c.fill();
+        }
+
+        c.beginPath();
+        for (let i = 0; i < amount.value; i++) {
+            if (i % 2 == 0) {
+                c.moveTo(canvas.width/amount.value*i, canvas.height/2);
+                c.quadraticCurveTo(canvas.width/amount.value*(i+0.5), y, canvas.width/amount.value*(i+1), canvas.height/2);
+            } else {
+                c.moveTo(canvas.width/amount.value*i, canvas.height/2);
+                c.quadraticCurveTo(canvas.width/amount.value*(i+0.5), y^750, canvas.width/amount.value*(i+1), canvas.height/2);
             }
         }
+
+        c.lineTo(canvas.width,canvas.height);
+        c.lineTo(0,canvas.height);
+        c.lineTo(0,canvas.height/2);
+        c.fill();
     }
 }
 
@@ -65,7 +94,7 @@ function getParameterByName(name, url = window.location.href) {
 }
 
 function redirect() {
-    window.location.replace("?bg-color="+color.value.slice(1)+"&fill-style="+color2.value.slice(1)+"&amount="+amount.value);
+    window.location.replace("?bg-color="+color.value.slice(1)+"&fill-style="+color2.value.slice(1)+"&amount="+amount.value+"&bg-type="+bgType.value);
 }
 
 function exportImg(type) {
@@ -76,16 +105,6 @@ function exportImg(type) {
         link.click();
     }
 }
-
-//var grd = c.createLinearGradient(0,0,canvas.width,canvas.height);
-//grd.addColorStop(0,"red");
-//grd.addColorStop(1,"white");
-
-//console.log(grd)
-
-// Fill with gradient
-//c.fillStyle = grd;
-//c.fillRect(0,0,canvas.width,canvas.height);
 
 var isPaused = true;
 var time = 0;
