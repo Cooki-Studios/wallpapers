@@ -108,17 +108,9 @@ function exportImg(type) {
 
 var isPaused = true;
 var time = 0;
+var height = Math.random()*canvas.height/2;
 
-var t = setInterval(function() {
-    if (time == 100) {
-      reload();
-      draw(Math.random()*canvas.height/2);
-    }
-
-    if(!isPaused) {
-        time++;
-    }
-}, 1);
+draw(height);
 
 function play(){
     isPaused = false;
@@ -129,15 +121,20 @@ function pause(){
 }
 
 function reload(){
-  time = 0;
   t = setInterval(function() {
-    if (time == 100) {
-        draw(Math.random()*canvas.height/2);
+    height = Math.random()*canvas.height/2;
+
+    if (time == 1) {
+        time = 0;
+        height = Math.random()*canvas.height/2;
+        clearInterval(t);
         reload();
     }
 
+    draw(height*time);
+
     if(!isPaused) {
-        time++;
+        time += 0.1;
     }
-}, 1);
+}, 10);
 }
