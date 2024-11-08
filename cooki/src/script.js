@@ -22,7 +22,11 @@ function wallpaperMediaPropertiesListener(event) {
         italic: false
     }
 
+    event.artist = event.artist.replaceAll(" - Topic","");
+    event.title = event.title.replaceAll("Fuck","F**k");
+    event.title = event.title.replaceAll("fuck","f**k");
     let url = "https://pega-a-letra-pro-pai.onrender.com/api/lyrics?song="+event.title+"&artist="+event.artist;
+    console.log(url);
     if (window.localStorage.getItem(url) === null) {
         fetch(url).then(function(response) {
             return response.json();
@@ -185,17 +189,34 @@ function drawVisualizer() {
 
         // Variables for smooth curves
         const points = [];
+        const points2 = [];
 
         // Loop through frequency data and draw bars
         for (let i = 0; i < mainAudioArray.length/2; i++) {
             const value = mainAudioArray[i]; // Get the frequency value for the current bar
-            const height = value*64; // The height of each bar will be proportional to the frequency
+            const height = value*128; // The height of each bar will be proportional to the frequency
 
             // X position of the current bar
             const x = i * (barWidth + barSpacing);
 
             // Add the current bar point to the points array
             points.push({ x, y: canvas.height - height });
+
+            if (i == 4) {
+                document.body.style.transform = "perspective(500px) translate3d(0, 0, "+value*64+"px)";
+            }
+        }
+
+        // Loop through frequency data and draw bars
+        for (let i = mainAudioArray.length/2; i < mainAudioArray.length; i++) {
+            const value = mainAudioArray[i]; // Get the frequency value for the current bar
+            const height = value*128; // The height of each bar will be proportional to the frequency
+
+            // X position of the current bar
+            const x = (i-mainAudioArray.length/2) * (barWidth + barSpacing);
+
+            // Add the current bar point to the points array
+            points2.push({ x, y: height });
         }
 
         // Draw smooth lines between bars
@@ -213,6 +234,27 @@ function drawVisualizer() {
         drawLines(points);
         ctx.lineTo(canvas.width,canvas.height);
         ctx.lineTo(0,canvas.height);
+        ctx.closePath();
+
+        ctx.fillStyle = textColour+"55"; // Color for the shape
+        ctx.fill();
+
+        // Bars 2
+        // Draw smooth lines between bars
+        ctx.beginPath();
+        ctx.moveTo(points2[0].x, points2[0].y); // Start at the first point
+        drawLines(points2);
+        ctx.strokeStyle = textColour+"aa"; // Color for the line
+        ctx.lineWidth = 2; // Line width
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.moveTo(0,0);
+        ctx.lineTo(points2[0].x, points2[0].y); // Start at the first point
+        drawLines(points2);
+        ctx.lineTo(canvas.width,0);
+        ctx.lineTo(0,0);
         ctx.closePath();
 
         ctx.fillStyle = textColour+"55"; // Color for the shape
