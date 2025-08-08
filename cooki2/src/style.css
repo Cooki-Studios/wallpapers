@@ -1,0 +1,106 @@
+:root {
+    --bgCol: #151515;
+    --iconCol: #303030;
+    --iconSize: 64vw;
+    --timeSize: 10vw;
+    --dateSize: 2vw;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    background: var(--bgCol);
+    /*background: #151515;*/
+    /*background: #f5e0dc;*/
+    /*background: #fde338;*/
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: var(--bgCol);
+    /*background: #151515;*/
+    /*background: #f5e0dc;*/
+    /*background: #fde338;*/
+    /*background: #fde399;*/
+}
+
+#overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    /*box-shadow: inset 0 0 5em #fde399;*/
+    box-shadow: inset 0 0 5vw #000000;
+    z-index: 1;
+}
+
+#canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    rotate: -5deg;
+
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    /*filter: blur(1px);*/
+}
+
+.tile {
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: var(--iconSize);
+    background-color: var(--iconCol);
+
+    mask: url(img/Cooki.svg) 100% 100% / 50% no-repeat;
+    mask-size: 50%;
+
+    animation: slideAnimation 10s infinite linear;
+}
+
+@keyframes slideAnimation {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+#time, #date {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: whitesmoke;
+    font-size: var(--timeSize);
+    line-height: 0;
+    margin: 0;
+}
+
+#date {
+    color: grey;
+    font-size: var(--dateSize);
+    margin-top: calc(var(--timeSize) * (3/5));
+}
+
+.rubik {
+    font-family: "Rubik", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: italic;
+}

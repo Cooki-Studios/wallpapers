@@ -90,6 +90,8 @@ html, body {
 
     white-space: nowrap;
     overflow: hidden;
+
+    transition: transform 100ms;
 }
 
 .lyric.bold {

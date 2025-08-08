@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Cooki Studios</title>
+	<link rel="stylesheet" href="src/style.css">
+	<link rel="icon" href="src/img/CookiBiteBlack.svg">
+<!--	<style>-->
+<!--        @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');-->
+<!--	</style>-->
+</head>
+<body>
+	<h1 id="time" class="rubik"></h1>
+	<h1 id="date" class="rubik"></h1>
+	<script>
+        const time = document.getElementById('time');
+        const date = document.getElementById('date');
+        setInterval(() => {
+            time.textContent = `${String(new Date().getHours() % 12 || 12).padStart(2, '0')}:${String(new Date().getMinutes()).padStart(2, '0')}`;
+            date.textContent = new Date().toDateString();
+        });
+	</script>
+	<div id="overlay"></div>
+	<div id="canvas"></div>
+	<script src="src/canvas.js"></script>
+</body>
+</html>
